@@ -1,17 +1,15 @@
 import React,{useState} from 'react'
 import Nav from '../nav/nav'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 
 export default function StudentDetails() {
     const [students, setStudents] = useState([]);
     const navigate = useNavigate();
+    const setError= useState(null);
 
    function StudentDetails() {
   
-
-   
-    let tbl =document.getElementById("tblid");
-
+    try{
         fetch("http://localhost:9070/postdata",
             {
                 method: "GET",
@@ -25,6 +23,13 @@ export default function StudentDetails() {
         .then(data =>{
             setStudents(data);
         })
+
+      }
+      catch (error) {
+        setError(error.message);
+        console.log("error")
+    }
+        
     }
 
 
@@ -42,6 +47,9 @@ function deletestudent(id){
     alert("delete student successfully .....")
    })
 }
+
+
+StudentDetails();
 
 function updatestudent(student){
     navigate(`/updateprofile/${student.id}` , {state: student});
@@ -76,7 +84,6 @@ function updatestudent(student){
         </tbody>
 </table>
 
-<button onClick={StudentDetails()}></button>
 
     </div>
   )

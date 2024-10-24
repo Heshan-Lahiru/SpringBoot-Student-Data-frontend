@@ -1,9 +1,10 @@
 import React from 'react'
-import { useParams,useLocation } from 'react-router-dom'
+import { useLocation,useNavigate } from 'react-router-dom'
+
 
 export default function UpdateProfile() {
-  
-const {id} =useParams();
+  const Navigate =useNavigate();
+
 const Location = useLocation();
 const Student =Location.state;
 
@@ -38,7 +39,8 @@ function updatedata(){
                   }
             )
             .then(res =>
-                console.log("updated")
+              alert(" Update Successfully"),
+              Navigate('/')
               )
     
     

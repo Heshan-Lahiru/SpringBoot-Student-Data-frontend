@@ -1,8 +1,21 @@
-import React from 'react'
+import React,{useState} from 'react'
 
-export default function profile() {
+
+export default function Profile() {
+  
+  const [selectedFile, setSelectedFileName] = useState('');
+  const [selectedFileobject, setSelectedFileobject] = useState(null);
+  const onFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFileName(file.name);
+      setSelectedFileobject(file);
+    }
+  };
 
      function datasave() {
+try{
+
       let name=document.getElementById("input_name").value;
       let age=document.getElementById("input_age").value;
       let contact=document.getElementById("input_contact").value;
@@ -10,8 +23,13 @@ export default function profile() {
       let guardian_address=document.getElementById("input_guardian_address").value;
       let guardian_contact=document.getElementById("input_guardian_contact").value;
      
+    if(name==="" || age==="" || contact==="" || guardian_name==="" || guardian_address==="" || guardian_contact ===""){
+         alert("Fill form Correctly")
+    }
+else{
+    
       let jsondata ={
-    "profile_image" : name,
+    "profile_image" : selectedFile,
     "name" : name,
     "age" : age,
     "contact" : contact,
@@ -31,11 +49,26 @@ export default function profile() {
         )
         .then(res => res.json())
         .then(data =>{
-            console.log(data)
+            alert("Register Successfully");
+            cleartypedata();
         })
-
-
+      }
+      }
+      catch(error){
+       console.log("error")
+      }
+        
     };
+
+  function cleartypedata(){ 
+     document.getElementById("input_name").value = "";
+     document.getElementById("input_age").value = "";
+     document.getElementById("input_contact").value = "";
+     document.getElementById("input_guardian_name").value = "";
+     document.getElementById("input_guardian_address").value = "";
+     document.getElementById("input_guardian_contact").value = "";
+
+  }
 
   return (
     <div>
@@ -45,7 +78,7 @@ export default function profile() {
 
       <div className="col-lg-7 text-center text-lg-start">
       <img  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSteItzPyeDKBxyWiOA8xrPZXIlxOYv1b1VVg&s' alt='profileimage'/>
-      <input class="form-control" type='file' ></input>
+      <input class="form-control" type='file' onChange={onFileChange} ></input>
       </div>
 
       <div className="col-md-10 mx-auto col-lg-5">
@@ -91,7 +124,7 @@ export default function profile() {
             <label >Guardian Contact</label>
           </div>
 
-          <button className="w-30 btn btn-lg btn-danger" style={{marginRight:'30px'}}>Clear</button>
+          <button className="w-30 btn btn-lg btn-danger" onClick={cleartypedata} style={{marginRight:'30px'}}>Clear</button>
           <button className="w-30 btn btn-lg btn-primary"  onClick={datasave}>Register</button>
          
        
