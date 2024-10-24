@@ -4,12 +4,12 @@ import React,{useState} from 'react'
 export default function Profile() {
   
   const [selectedFile, setSelectedFileName] = useState('');
-  const [selectedFileobject, setSelectedFileobject] = useState(null);
+  
   const onFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setSelectedFileName(file.name);
-      setSelectedFileobject(file);
+      
     }
   };
 
@@ -23,10 +23,17 @@ try{
       let guardian_address=document.getElementById("input_guardian_address").value;
       let guardian_contact=document.getElementById("input_guardian_contact").value;
      
-    if(name==="" || age==="" || contact==="" || guardian_name==="" || guardian_address==="" || guardian_contact ===""){
+
+
+    if(selectedFile === "" || name==="" || age==="" || contact==="" || guardian_name==="" || guardian_address==="" || guardian_contact ===""){
          alert("Fill form Correctly")
     }
 else{
+
+ if(contact.length<10){
+    alert("Wrong Mobile Number")
+  }
+  else{
     
       let jsondata ={
     "profile_image" : selectedFile,
@@ -53,7 +60,7 @@ else{
             cleartypedata();
         })
       }
-      }
+      }}
       catch(error){
        console.log("error")
       }

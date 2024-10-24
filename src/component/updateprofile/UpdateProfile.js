@@ -40,7 +40,7 @@ function updatedata(){
             )
             .then(res =>
               alert(" Update Successfully"),
-              Navigate('/')
+              Navigate('/studenttable')
               )
     
     
@@ -67,18 +67,18 @@ function updatedata(){
         </div>
 
           <div className="form-floating mb-3">
-            <input type="text" className="form-control" id="input_name" placeholder="name"/>
-            <label>Name</label>
+            <input type="text" className="form-control"  id="input_name" placeholder="name"/>
+            <label>{Student.name}</label>
           </div>
 
           <div className="form-floating mb-3">
             <input type="text" className="form-control" id="input_age" placeholder="age"/>
-            <label >Age</label>
+            <label >{Student.age}</label>
           </div>
 
           <div className="form-floating mb-3">
             <input type="text" className="form-control" id="input_contact" placeholder="contact"/>
-            <label >Contact</label>
+            <label >{Student.contact}</label>
           </div>
 
           <div className="form-floating mb-3">
@@ -88,17 +88,17 @@ function updatedata(){
 
           <div className="form-floating mb-3">
             <input type="text" className="form-control" id="input_guardian_name" placeholder="Guardian Name"/>
-            <label >Guardian Name</label>
+            <label >{Student.guardian_name}</label>
           </div>
 
           <div className="form-floating mb-3">
             <input type="text" className="form-control" id="input_guardian_address" placeholder="Guardian Address"/>
-            <label >Guardian Address</label>
+            <label >{Student.guardian_address}</label>
           </div>
 
           <div className="form-floating mb-3">
             <input type="text" className="form-control" id="input_guardian_contact" placeholder="Guardian Contact"/>
-            <label >Guardian Contact</label>
+            <label >{Student.guardian_contact}</label>
           </div>
 
           <button className="w-30 btn btn-lg btn-primary"  onClick={updatedata}>Update</button>
